@@ -1,0 +1,10 @@
+{
+  "name": "forge-deploy-proxy",
+  "version": "0.0.1",
+  "description": "proxy deployment for forge-deploy",
+  "license": "MIT",
+  "files": [
+    "src",
+    "templates"
+  ]
+}
