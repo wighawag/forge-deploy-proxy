@@ -6,5 +6,8 @@
   "files": [
     "src",
     "templates"
-  ]
+  ],
+  "peerDependencies": {
+    "forge-deploy": "^0.0.35"
+  }
 }
