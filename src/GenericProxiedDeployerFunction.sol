@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.0;
 
 import "forge-deploy/Deployer.sol";
 import {DefaultDeployerFunction, DeployOptions} from "forge-deploy/DefaultDeployerFunction.sol";
@@ -67,7 +67,7 @@ library GenericProxiedDeployerFunction {
                 EIP173Proxy(payable(deployed)).upgradeTo(implementation);
                 // TODO trigger a change in abi on the main contract // => _Implementation will trigger that ?
 
-                deployer.save(name, deployed, "", "", artifact); // new artifact
+                deployer.save(name, deployed, artifact, "", ""); // new artifact
 
                 // console.log("-- upgraded --");
             } else {
@@ -93,7 +93,7 @@ library GenericProxiedDeployerFunction {
                 );
 
                 // bytecode 0x indicate proxy
-                deployer.save(name, deployed, "", "", artifact);
+                deployer.save(name, deployed, artifact, "", "");
                 // console.log("new proxy:");
                 // console.log(deployed);
             }
