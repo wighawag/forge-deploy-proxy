@@ -1,6 +1,6 @@
 {
   "name": "forge-deploy-proxy",
-  "version": "0.0.2",
+  "version": "0.0.2-experimental.1",
   "description": "proxy deployment for forge-deploy",
   "license": "MIT",
   "files": [
