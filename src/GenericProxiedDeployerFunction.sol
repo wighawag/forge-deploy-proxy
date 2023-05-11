@@ -57,6 +57,7 @@ library GenericProxiedDeployerFunction {
         string memory proxyName = string.concat(name, "_Proxy");
         string memory implName = string.concat(name, "_Implementation");
         // console.log("new proxy needed");
+        deployer.ignoreDeployment(proxyName);
         deployer.ignoreDeployment(implName);
         address implementation = DefaultDeployerFunction.deploy(deployer, implName, artifact, args);
         // console.log("new implementation:");
@@ -106,7 +107,7 @@ library GenericProxiedDeployerFunction {
             implementation = existingImpl.addr;
         }
         deployed = existingProxy.addr;
-        vm.broadcast(options.proxyOwner);
+        if (deployer.autoBroadcast) {vm.broadcast(options.proxyOwner);}
         // TODO extra call data (upgradeToAndCall)
         EIP173Proxy(payable(deployed)).upgradeTo(implementation);
         // TODO trigger a change in abi on the main contract // => _Implementation will trigger that ?
