@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
-import {Deployer} from "forge-deploy/Deployer.sol";
+import {Deployer, DeployerFunctions} from "forge-deploy/Deployer.sol";
 import {GenericProxiedDeployerFunction, ProxiedDeployOptions} from "forge-deploy-proxy/GenericProxiedDeployerFunction.sol";
 
 // --------------------------------------------------------------------------------------------
@@ -18,13 +18,13 @@ string constant Artifact_{{this.contract_name}} = "{{this.solidity_filename}}:{{
 // --------------------------------------------------------------------------------------------
 
 library ProxiedDeployerFunctions{
-
+    using DeployerFunctions for Deployer;
     // --------------------------------------------------------------------------------------------
     // GENERATED
     // --------------------------------------------------------------------------------------------
     {{#each this}}
     function deploy_{{this.contract_name}}(
-        Deployer deployer,
+        Deployer storage deployer,
         string memory name,
         {{#each this.constructor.args}}{{#if this.custom_type}}_{{../contract_name}}.{{/if}}{{this.type}} {{#if this.memory_type }}memory{{/if}} {{this.name}},{{/each}}
         ProxiedDeployOptions memory options

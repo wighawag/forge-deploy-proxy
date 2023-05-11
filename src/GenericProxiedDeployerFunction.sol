@@ -10,7 +10,9 @@ struct ProxiedDeployOptions {
     address proxyOwner;
 }
 
-library GenericProxiedDeployerFunction {   
+library GenericProxiedDeployerFunction {
+    using DeployerFunctions for Deployer;
+
     Vm constant vm = Vm(address(bytes20(uint160(uint256(keccak256("hevm cheat code"))))));
 
     /// @notice generic deploy function that save it using the deployer contract
@@ -20,7 +22,7 @@ library GenericProxiedDeployerFunction {
     /// @param args encoded aergument for the contract's constructor
     /// @param options proxy options
     function deploy(
-        Deployer deployer,
+        Deployer storage deployer,
         string memory name,
         string memory artifact,
         bytes memory args,
@@ -47,12 +49,7 @@ library GenericProxiedDeployerFunction {
                     // we will override the previous implementation
                     deployer.ignoreDeployment(implName);
                     // TODO implementation args
-                    implementation = DefaultDeployerFunction.deploy(
-                        deployer,
-                        implName,
-                        artifact,
-                        args
-                    );
+                    implementation = DefaultDeployerFunction.deploy(deployer, implName, artifact, args);
                     // console.log("new implementation for existing proxy:");
                     // console.log(implementation);
                     // console.log(artifact);
@@ -73,12 +70,7 @@ library GenericProxiedDeployerFunction {
             } else {
                 // console.log("new proxy needed");
                 deployer.ignoreDeployment(implName);
-                address implementation = DefaultDeployerFunction.deploy(
-                    deployer,
-                    implName,
-                    artifact,
-                    args
-                );
+                address implementation = DefaultDeployerFunction.deploy(deployer, implName, artifact, args);
                 // console.log("new implementation:");
                 // console.log(implementation);
                 // console.log(artifact);
@@ -86,10 +78,7 @@ library GenericProxiedDeployerFunction {
                 // TODO extra call data
                 bytes memory proxyArgs = abi.encode(implementation, options.proxyOwner, bytes(""));
                 deployed = DefaultDeployerFunction.deploy(
-                    deployer,
-                    proxyName,
-                    "ForgeDeploy_EIP173Proxy.sol:EIP173Proxy",
-                    proxyArgs
+                    deployer, proxyName, "ForgeDeploy_EIP173Proxy.sol:EIP173Proxy", proxyArgs
                 );
 
                 // bytecode 0x indicate proxy
