@@ -39,7 +39,8 @@ library GenericProxiedDeployerFunction {
                 deployed = upgradeIfDifferent(deployer, existingProxy, name, artifact, args, options);
                 // console.log("-- upgraded --");
             } else {
-                deployed = deployProxy(deployer, name, artifact, args, options);
+                require(deployer.getAddress(name) == address(0), strings.concat("trying to deploy a proxy on an existing contract:", name));
+                deployed = deployProxy(deployer, name, artifact, args, options); 
             }
             deployer.save(name, deployed, artifact, "", ""); // new artifact
         } else {
