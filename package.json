@@ -1,6 +1,6 @@
 {
   "name": "forge-deploy-proxy",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "proxy deployment for forge-deploy",
   "license": "MIT",
   "files": [
@@ -8,6 +8,6 @@
     "templates"
   ],
   "peerDependencies": {
-    "forge-deploy": "^0.0.35"
+    "forge-deploy": ">=0.0.37 && < 0.1.0"
   }
 }
