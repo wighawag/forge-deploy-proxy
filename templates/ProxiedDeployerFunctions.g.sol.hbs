@@ -2,7 +2,8 @@
 pragma solidity ^0.8.13;
 
 import {Deployer} from "forge-deploy/Deployer.sol";
-import {GenericProxiedDeployerFunction, ProxiedDeployOptions} from "forge-deploy-proxy/GenericProxiedDeployerFunction.sol";
+import {GenericProxiedDeployerFunction, ProxyOptions, FullProxyOptions, ProxyOptionsOnTag, ProxyOptionsWithImplementation} from "forge-deploy-proxy/GenericProxiedDeployerFunction.sol";
+import {DeployOptions} from "forge-deploy/DefaultDeployerFunction.sol";
 
 // --------------------------------------------------------------------------------------------
 // GENERATED
@@ -27,10 +28,77 @@ library ProxiedDeployerFunctions{
         Deployer deployer,
         string memory name,
         {{#each this.constructor.args}}{{#if this.custom_type}}_{{../contract_name}}.{{/if}}{{this.type}} {{#if this.memory_type }}memory{{/if}} {{this.name}},{{/each}}
-        ProxiedDeployOptions memory options
+        FullProxyOptions memory options
     ) internal returns ({{this.contract_name}}) {
         bytes memory args = abi.encode({{#each this.constructor.args}}{{this.name}}{{#unless @last}},{{/unless}}{{/each}});
         return {{this.contract_name}}(GenericProxiedDeployerFunction.deploy(deployer, name, Artifact_{{this.contract_name}}, args, options));
+    }
+    function deploy_{{this.contract_name}}(
+        Deployer deployer,
+        string memory name,
+        {{#each this.constructor.args}}{{#if this.custom_type}}_{{../contract_name}}.{{/if}}{{this.type}} {{#if this.memory_type }}memory{{/if}} {{this.name}},{{/each}}
+        FullProxyOptions memory options,
+        DeployOptions memory deployOptions
+    ) internal returns ({{this.contract_name}}) {
+        bytes memory args = abi.encode({{#each this.constructor.args}}{{this.name}}{{#unless @last}},{{/unless}}{{/each}});
+        return {{this.contract_name}}(GenericProxiedDeployerFunction.deploy(deployer, name, Artifact_{{this.contract_name}}, args, options, deployOptions));
+    }
+    function deploy_{{this.contract_name}}(
+        Deployer deployer,
+        string memory name,
+        {{#each this.constructor.args}}{{#if this.custom_type}}_{{../contract_name}}.{{/if}}{{this.type}} {{#if this.memory_type }}memory{{/if}} {{this.name}},{{/each}}
+        ProxyOptions memory options
+    ) internal returns ({{this.contract_name}}) {
+        bytes memory args = abi.encode({{#each this.constructor.args}}{{this.name}}{{#unless @last}},{{/unless}}{{/each}});
+        return {{this.contract_name}}(GenericProxiedDeployerFunction.deploy(deployer, name, Artifact_{{this.contract_name}}, args, options));
+    }
+    function deploy_{{this.contract_name}}(
+        Deployer deployer,
+        string memory name,
+        {{#each this.constructor.args}}{{#if this.custom_type}}_{{../contract_name}}.{{/if}}{{this.type}} {{#if this.memory_type }}memory{{/if}} {{this.name}},{{/each}}
+        ProxyOptions memory options,
+        DeployOptions memory deployOptions
+    ) internal returns ({{this.contract_name}}) {
+        bytes memory args = abi.encode({{#each this.constructor.args}}{{this.name}}{{#unless @last}},{{/unless}}{{/each}});
+        return {{this.contract_name}}(GenericProxiedDeployerFunction.deploy(deployer, name, Artifact_{{this.contract_name}}, args, options, deployOptions));
+    }
+    function deploy_{{this.contract_name}}(
+        Deployer deployer,
+        string memory name,
+        {{#each this.constructor.args}}{{#if this.custom_type}}_{{../contract_name}}.{{/if}}{{this.type}} {{#if this.memory_type }}memory{{/if}} {{this.name}},{{/each}}
+        ProxyOptionsOnTag memory options
+    ) internal returns ({{this.contract_name}}) {
+        bytes memory args = abi.encode({{#each this.constructor.args}}{{this.name}}{{#unless @last}},{{/unless}}{{/each}});
+        return {{this.contract_name}}(GenericProxiedDeployerFunction.deploy(deployer, name, Artifact_{{this.contract_name}}, args, options));
+    }
+    function deploy_{{this.contract_name}}(
+        Deployer deployer,
+        string memory name,
+        {{#each this.constructor.args}}{{#if this.custom_type}}_{{../contract_name}}.{{/if}}{{this.type}} {{#if this.memory_type }}memory{{/if}} {{this.name}},{{/each}}
+        ProxyOptionsOnTag memory options,
+        DeployOptions memory deployOptions
+    ) internal returns ({{this.contract_name}}) {
+        bytes memory args = abi.encode({{#each this.constructor.args}}{{this.name}}{{#unless @last}},{{/unless}}{{/each}});
+        return {{this.contract_name}}(GenericProxiedDeployerFunction.deploy(deployer, name, Artifact_{{this.contract_name}}, args, options, deployOptions));
+    }
+    function deploy_{{this.contract_name}}(
+        Deployer deployer,
+        string memory name,
+        {{#each this.constructor.args}}{{#if this.custom_type}}_{{../contract_name}}.{{/if}}{{this.type}} {{#if this.memory_type }}memory{{/if}} {{this.name}},{{/each}}
+        ProxyOptionsWithImplementation memory options
+    ) internal returns ({{this.contract_name}}) {
+        bytes memory args = abi.encode({{#each this.constructor.args}}{{this.name}}{{#unless @last}},{{/unless}}{{/each}});
+        return {{this.contract_name}}(GenericProxiedDeployerFunction.deploy(deployer, name, Artifact_{{this.contract_name}}, args, options));
+    }
+    function deploy_{{this.contract_name}}(
+        Deployer deployer,
+        string memory name,
+        {{#each this.constructor.args}}{{#if this.custom_type}}_{{../contract_name}}.{{/if}}{{this.type}} {{#if this.memory_type }}memory{{/if}} {{this.name}},{{/each}}
+        ProxyOptionsWithImplementation memory options,
+        DeployOptions memory deployOptions
+    ) internal returns ({{this.contract_name}}) {
+        bytes memory args = abi.encode({{#each this.constructor.args}}{{this.name}}{{#unless @last}},{{/unless}}{{/each}});
+        return {{this.contract_name}}(GenericProxiedDeployerFunction.deploy(deployer, name, Artifact_{{this.contract_name}}, args, options, deployOptions));
     }
     {{/each}}
     // --------------------------------------------------------------------------------------------
